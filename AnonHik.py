@@ -9,17 +9,17 @@ print(final)
 def download(url, path):
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Podnosi wyjątek, jeśli status odpowiedzi jest różny od 2xx
+        response.raise_for_status()
 
         with open(save_path, 'wb') as file:
             file.write(response.content)
-        print("Snapshot Saved {save_path}")
+        print("Snapshot Saved")
 
     except requests.exceptions.HTTPError as e:
         if response.status_code == 401:
             print("Camera is not vulnerable! Error 401")
         else:
-            print(f"Wystąpił błąd HTTP: {e}")
+            print("HTTP Error: {e}")
     except requests.exceptions.RequestException as e:
         print(f"Unknown Error: {e}")
         
